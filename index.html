@@ -50,8 +50,8 @@
             </div>
         </div>
         <div class="notify-section">
-            <p id="valid-msg" class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p id="invalid-msg" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+            <p id="invalid-msg" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="valid-msg" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
 
@@ -63,10 +63,14 @@
         element.style.display = 'none';
     }
     //Showing the random number on the pin box
+    var invalidMsg = document.getElementById('invalid-msg');
+    var validMsg = document.getElementById('valid-msg');
     var pin_btn = document.getElementById('pinBtn');
     pin_btn.addEventListener('click', function(){
             var digit = Math.floor(1000 + Math.random() * 9000);
         document.getElementById('pinDisplay').value = digit;
+            validMsg.style.display = 'none';
+            invalidMsg.style.display = 'none';
     })
 
     //Dial pad value
@@ -109,10 +113,15 @@
          var dialNumber = document.getElementById('displayNum').value;
             
             if(pinNumber != dialNumber){
-                validMsg.style.display = "block";
+                invalidMsg.style.display = "block";
+                validMsg.style.display = "none";
+            }
+            else if (pinNumber == [] && dialNumber == []){
+                invalidMsg.style.display = 'block';
             }
             else{
-                invalidMsg.style.display = "block";
+                validMsg.style.display = "block";
+                invalidMsg.style.display = 'none';
             }
         })
 
